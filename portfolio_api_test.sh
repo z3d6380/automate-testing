@@ -14,8 +14,7 @@
 curl http://$1:$2/api/timeline_post
 
 # POST
-curl -X POST http://$1:$2/api/timeline_post
-curl http://$1:$2/api/timeline_post # GET to show new entry
+curl -X POST http://$1:$2/api/timeline_post -d 'name=Test&email=test@tester.com&content=Just added Database to my portfolio site!'
 
 # DELETE
 # curl -X DELETE http://$1:$2/api/timeline_post
