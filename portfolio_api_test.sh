@@ -11,10 +11,17 @@
 # Ex:    ./portfolio_api_test.sh localhost 5000
 
 # GET
+echo -e "Testing GET method..."
 curl http://$1:$2/api/timeline_post
+echo -e "\n"
 
 # POST
-curl -X POST http://$1:$2/api/timeline_post -d 'name=Test&email=test@tester.com&content=Just added Database to my portfolio site!'
+echo -e "Testing POST method..."
+lastID=$(curl -sX POST http://$1:$2/api/timeline_post -d 'name=Test&email=test@tester.com&content=Just added Database to my portfolio site!' | grep -E -o "\"id\":[0-9]*" | cut -d":" -f2)
+curl http://$1:$2/api/timeline_post
+echo -e "The id of your test entry is: $lastID\n"
 
 # DELETE
-# curl -X DELETE http://$1:$2/api/timeline_post
+echo -e "Testing DELETE method..."
+curl -X DELETE http://$1:$2/api/timeline_post -d 'id='$lastID
+echo -e "\n"
